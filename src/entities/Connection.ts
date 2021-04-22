@@ -1,16 +1,25 @@
-import { Entity, PrimaryColumn, Column, CreateDateColumn, ManyToMany, JoinColumn, ManyToOne } from 'typeorm';
-import { v4 as uuid } from 'uuid';
-import { User } from './Users';
+import {
+  Entity,
+  Column,
+  PrimaryColumn,
+  CreateDateColumn,
+  ManyToOne,
+  JoinColumn,
+  UpdateDateColumn
+} from 'typeorm'
 
-@Entity("messages")
-class Message {
+import { v4 as uuid } from 'uuid';
+import { User } from '../entities/Users';
+
+@Entity("connections")
+class Connection {
 
   @PrimaryColumn()
   id: string;
   @Column()
   admin_id: string;
   @Column()
-  text: string;
+  socket_id: string;
 
   @JoinColumn({ name: "user_id" })
   @ManyToOne(() => User)
@@ -23,6 +32,9 @@ class Message {
   @CreateDateColumn()
   created_at: Date;
 
+  @UpdateDateColumn()
+  updated_at: Date;
+
   constructor() {
     if (!this.id) {
       this.id = uuid();
@@ -30,4 +42,4 @@ class Message {
   }
 }
 
-export { Message }
+export { Connection };
