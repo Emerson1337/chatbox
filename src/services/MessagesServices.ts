@@ -30,11 +30,11 @@ class MessagesService {
     return message;
   }
 
-  async findById(user_id: string) {
+  async findByIdUserMessages(user_id: string) {
 
     const messages = await this.messagesRepository.find({
       where: { user_id },
-      //relations: ['user'], ta dando erro saporra
+      relations: ["user"],
     });
 
     return messages;
